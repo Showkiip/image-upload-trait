@@ -55,7 +55,6 @@ max_size: Maximum file size in kilobytes (default: 2048 KB).
 ```bash
 return [
     'disk' => env('IMAGE_UPLOAD_DISK', 'public'),
-    'path' => env('IMAGE_UPLOAD_PATH', 'uploads/images/'),
     'allowed_types' => ['jpg', 'jpeg', 'png', 'gif'],
     'max_size' => 2048, // Size in KB
 ];
