@@ -6,7 +6,7 @@ A simple trait for handling image uploads in Laravel.
 
 ### Step 1: Install the Package
 
-     Add the package to your Laravel project using Composer:
+Add the package to your Laravel project using Composer:
 
 
 
@@ -15,7 +15,7 @@ composer require showkiip/image-upload-trait
 
 ### Step 2: Publish the Configuration File
 
-     Publish the configuration file to customize the default settings:
+Publish the configuration file to customize the default settings:
 
 ```bash
 php artisan vendor:publish --provider="Showkiip\ImageUploadTrait\ImageUploadServiceProvider"
