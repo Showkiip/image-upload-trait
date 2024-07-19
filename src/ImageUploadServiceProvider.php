@@ -13,7 +13,7 @@ class ImageUploadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Register any package services or bindings here.
+        // Merge package configuration with application's copy
         $this->mergeConfigFrom(__DIR__ . '/../config/image-upload.php', 'image-upload');
     }
 
