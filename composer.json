@@ -1,26 +1,24 @@
 {
     "name": "showkiip/image-upload-trait",
-    "description": "A simple image upload package",
+    "description": "A Laravel trait for handling image uploads.",
     "type": "library",
     "autoload": {
         "psr-4": {
             "Showkiip\\ImageUploadTrait\\": "src/"
         }
     },
-    "require": {
-        "php": ">=8.1"
-    },
-    "authors": [
-        {
-            "name": "Showkat Ali",
-            "email": "showkii009@gmail.com"
-        }
-    ],
     "extra": {
         "laravel": {
             "providers": [
                 "Showkiip\\ImageUploadTrait\\ImageUploadServiceProvider"
             ]
         }
-    }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Showkat Ali",
+            "email": "showkii009@gmail.com"
+        }
+    ]
 }
