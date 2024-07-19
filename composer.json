@@ -1,0 +1,21 @@
+{
+    "name": "Showkiip/image-upload-trait",
+    "autoload": {
+        "psr-4": {
+            "Showkiip\\ImageUploadTrait\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Showkat Ali",
+            "email": "showkii009@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Showkiip\\ImageUploadTrait\\ImageUploadServiceProvider"
+            ]
+        }
+    }
+}
