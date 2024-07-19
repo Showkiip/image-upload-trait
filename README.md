@@ -10,16 +10,16 @@ Add the package to your Laravel project using Composer:
 
 
 
-```bash
+ ```bash
 composer require showkiip/image-upload-trait
-
+```
 ### Step 2: Publish the Configuration File
 
 Publish the configuration file to customize the default settings:
 
 ```bash
 php artisan vendor:publish --provider="Showkiip\ImageUploadTrait\ImageUploadServiceProvider"
-
+```
 
 This command will create a `config/image-upload.php` file in your Laravel project.
 
@@ -29,7 +29,7 @@ To make uploaded files accessible via the web, create a symbolic link from the `
 
 ```bash
 php artisan storage:link
-
+```
 This command creates the necessary link for serving files stored in `storage/app/public`.
 
 ## Configuration
@@ -50,7 +50,7 @@ return [
     'allowed_types' => ['jpg', 'jpeg', 'png', 'gif'],
     'max_size' => 2048, // Size in KB
 ];
-
+```
 
 ### Usage
 
@@ -75,7 +75,7 @@ class SomeController extends Controller
     }
 }
 
-
+```
 ## Common Issues
 
 Files Not Accessible: Ensure you have run `php artisan storage:link` to create the symbolic link from `public/storage` to storage/app/public. Without this, files stored in storage/app/public will not be accessible via the web.
