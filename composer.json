@@ -1,18 +1,14 @@
 {
-    "name": "Showkiip/image-upload-trait",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/your-username/image-upload-trait.git"
-        }
-    ],
+    "name": "showkiip/image-upload-trait",
+    "description": "A simple image upload package",
+    "type": "library",
     "autoload": {
         "psr-4": {
             "Showkiip\\ImageUploadTrait\\": "src/"
         }
     },
     "require": {
-        "showkiip/image-upload-trait": "dev-master"
+        "php": ">=7.3"
     },
     "authors": [
         {
