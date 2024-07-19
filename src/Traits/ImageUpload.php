@@ -1,3 +1,4 @@
+<?php
 namespace Showkiip\ImageUploadTrait\Traits;
 
 use Illuminate\Support\Facades\Storage;

@@ -6,18 +6,27 @@ use Illuminate\Support\ServiceProvider;
 
 class ImageUploadServiceProvider extends ServiceProvider
 {
-    public function boot()
-    {
-        $this->publishes([
-            __DIR__.'/../config/image-upload.php' => config_path('image-upload.php'),
-        ], 'config');
-
-        // Merge package configuration with application's copy
-        $this->mergeConfigFrom(__DIR__.'/../config/image-upload.php', 'image-upload');
-    }
-
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
     public function register()
     {
-        // Register bindings, if any
+        // Merge package configuration with application's copy
+        $this->mergeConfigFrom(__DIR__ . '/../config/image-upload.php', 'image-upload');
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // Publish configuration file
+        $this->publishes([
+            __DIR__ . '/../config/image-upload.php' => config_path('image-upload.php'),
+        ], 'config');
     }
 }

@@ -1,3 +1,4 @@
+// src/config/image-upload.php
 <?php
 
 return [
