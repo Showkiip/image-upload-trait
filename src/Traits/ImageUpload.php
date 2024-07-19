@@ -9,23 +9,29 @@ trait ImageUpload
     public function uploads($file, $path, $existingFile = null)
     {
         try {
+            $disk = config('image-upload.disk');
+            $allowedTypes = config('image-upload.allowed_types');
+            $maxSize = config('image-upload.max_size') * 1024; // Convert to bytes
             if ($existingFile) {
-                Storage::disk('public')->delete($existingFile);
+                Storage::disk($disk)->delete($existingFile);
             }
             if ($file && $file->isValid()) {
+                if (!in_array($file->getClientOriginalExtension(), $allowedTypes)) {
+                    return ['error' => 'File type not allowed'];
+                }
+                if ($file->getSize() > $maxSize) {
+                    return ['error' => 'File size exceeds limit'];
+                }
                 $unqRan = Str::random(20);
                 $fileName = time() . $unqRan . $file->getClientOriginalName();
-                Storage::disk('public')->putFileAs($path, $file, $fileName);
-                $file_name = $file->getClientOriginalName();
-                $file_type = $file->getClientOriginalExtension();
-                $filePath = $path . $fileName;
+                Storage::disk($disk)->putFileAs($path, $file, $fileName);
 
                 return [
-                    'fileName' => $file_name,
-                    'fileType' => $file_type,
-                    'filePath' => $filePath,
-                    'fileSize' => $this->fileSize($file)
-                ];
+                        'fileName' => $file->getClientOriginalName(),
+                        'fileType' => $file->getClientOriginalExtension(),
+                        'filePath' => $path . $fileName,
+                        'fileSize' => $this->fileSize($file)
+                    ];
             }
         } catch (\Exception $e) {
             return $e->getMessage();

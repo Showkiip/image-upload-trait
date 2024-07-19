@@ -8,7 +8,9 @@ class ImageUploadServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        // Boot methods, if any
+        $this->publishes([
+            __DIR__.'/../config/image-upload.php' => config_path('image-upload.php'),
+        ]);
     }
 
     public function register()
