@@ -5,7 +5,16 @@ A simple trait for handling image uploads in Laravel.
 ## Installation
 
 ### Step 1: Install the Package
-
+before install the package in your laravel applications :
+By default, Composer pulls in packages from Packagist so you’ll have to make a slight adjustment to your new project composer.json file. Open the file and update include the following array somewhere in the object:
+```bash
+ "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Showkiip/image-upload-trait.git"
+        }
+    ],
+```
 Add the package to your Laravel project using Composer:
 
 
