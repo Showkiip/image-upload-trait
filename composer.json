@@ -7,13 +7,7 @@
             "Showkiip\\ImageUploadTrait\\": "src/"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Showkiip\\ImageUploadTrait\\ImageUploadServiceProvider"
-            ]
-        }
-    },
+    
     "license": "MIT",
     "authors": [
         {

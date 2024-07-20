@@ -10,22 +10,15 @@ trait ImageUpload
     public function uploads($file, $path, $existingFile = null)
     {
         try {
-            $disk = config('image-upload.disk');
-            $allowedTypes = config('image-upload.allowed_types');
-            $maxSize = config('image-upload.max_size') * 1024; // Convert to bytes
+          
             if ($existingFile) {
-                Storage::disk($disk)->delete($existingFile);
+                Storage::disk('public')->delete($existingFile);
             }
             if ($file && $file->isValid()) {
-                if (!in_array($file->getClientOriginalExtension(), $allowedTypes)) {
-                    return ['error' => 'File type not allowed'];
-                }
-                if ($file->getSize() > $maxSize) {
-                    return ['error' => 'File size exceeds limit'];
-                }
+              
                 $unqRan = Str::random(20);
                 $fileName = time() . $unqRan . $file->getClientOriginalName();
-                Storage::disk($disk)->putFileAs($path, $file, $fileName);
+                Storage::disk('public')->putFileAs($path, $file, $fileName);
 
                 return [
                         'fileName' => $file->getClientOriginalName(),
