@@ -22,17 +22,9 @@ Add the package to your Laravel project using Composer:
  ```bash
 composer require showkiip/image-upload-trait
 ```
-### Step 2: Publish the Configuration File
 
-Publish the configuration file to customize the default settings:
 
-```bash
-php artisan vendor:publish --provider="Showkiip\ImageUploadTrait\ImageUploadServiceProvider"
-```
-
-This command will create a `config/image-upload.php` file in your Laravel project.
-
-### Step 3: Create a Symbolic Link
+### Step 2: Create a Symbolic Link
 
 To make uploaded files accessible via the web, create a symbolic link from the `public/storage` directory to the `storage/app/public` directory:
 
@@ -41,24 +33,7 @@ php artisan storage:link
 ```
 This command creates the necessary link for serving files stored in `storage/app/public`.
 
-## Configuration
 
-Edit the `config/image-upload.php` file to customize the following settings:
-
-disk: The storage disk to use (default: public).
-allowed_types: An array of allowed file extensions (default: ['jpg', 'jpeg', 'png', 'gif']).
-max_size: Maximum file size in kilobytes (default: 2048 KB).
-
-## Example configuration:
-
-
-```bash
-return [
-    'disk' => env('IMAGE_UPLOAD_DISK', 'public'),
-    'allowed_types' => ['jpg', 'jpeg', 'png', 'gif'],
-    'max_size' => 2048, // Size in KB
-];
-```
 
 ### Usage
 
@@ -73,17 +48,48 @@ class SomeController extends Controller
 
     public function upload(Request $request)
     {
-        $result = $this->uploads($request->file('image'));
-        
-        if (isset($result['error'])) {
-            return response()->json(['error' => $result['error']], 400);
+         $file = $request->file('image');
+        $path = 'uploads/images';
+
+        // Existing file path to delete (optional)
+        $existingFile = 'uploads/images/old_example.jpg';
+
+        $uploadData = $this->upload($file, $path, $existingFile);
+
+        // Check if an error message was returned
+        if (is_string($uploadData)) {
+            return response()->json(['error' => $uploadData], 400);
         }
 
-        return response()->json($result);
+        return response()->json(['data' => $uploadData], 200);
     }
 }
 
 ```
+
+## Example Response
+When the `uploadImage` method is called and a file is successfully uploaded, the JSON response might look like this:
+
+
+```bash
+{
+    "data": {
+        "fileName": "example.jpg",
+        "fileType": "jpg",
+        "filePath": "uploads/images/1626800000_randomstring_example.jpg",
+        "fileSize": "1.5 MB"
+    }
+}
+
+```
+If an error occurs, the response might look like this:
+``` bash
+{
+    "error": "The file is not valid."
+}
+```
+
+
 ## Common Issues
 
 Files Not Accessible: Ensure you have run `php artisan storage:link` to create the symbolic link from `public/storage` to storage/app/public. Without this, files stored in storage/app/public will not be accessible via the web.
