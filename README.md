@@ -54,6 +54,7 @@ class SomeController extends Controller
         // Existing file path to delete (optional)
         $existingFile = 'uploads/images/old_example.jpg';
 
+        
         $uploadData = $this->uploads($file, $path, $existingFile);
 
         // Check if an error message was returned

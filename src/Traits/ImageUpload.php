@@ -1,4 +1,5 @@
 <?php
+
 namespace Showkiip\ImageUploadTrait\Traits;
 
 use Illuminate\Support\Facades\Storage;
@@ -10,22 +11,37 @@ trait ImageUpload
     public function uploads($file, $path, $existingFile = null)
     {
         try {
-          
+
             if ($existingFile) {
                 Storage::disk('public')->delete($existingFile);
             }
-            if ($file && $file->isValid()) {
-              
+
+            // Check if the file is a valid file path or an uploaded file
+            if (is_string($file)) {
+                // Handling the case when `$file` is a file path (as in extracted files)
+                $fileName = basename($file);
+                $destinationPath = $path . $fileName;
+                Storage::disk('public')->put($destinationPath, file_get_contents($file));
+
+                return [
+                    'fileName' => $fileName,
+                    'fileType' => pathinfo($fileName, PATHINFO_EXTENSION),
+                    'filePath' => $destinationPath,
+                    'fileSize' => filesize($file)
+                ];
+                
+            } else if ($file && $file->isValid()) {
+
                 $unqRan = Str::random(20);
                 $fileName = time() . $unqRan . $file->getClientOriginalName();
                 Storage::disk('public')->putFileAs($path, $file, $fileName);
 
                 return [
-                        'fileName' => $file->getClientOriginalName(),
-                        'fileType' => $file->getClientOriginalExtension(),
-                        'filePath' => $path . $fileName,
-                        'fileSize' => $this->fileSize($file)
-                    ];
+                    'fileName' => $file->getClientOriginalName(),
+                    'fileType' => $file->getClientOriginalExtension(),
+                    'filePath' => $path . $fileName,
+                    'fileSize' => $this->fileSize($file)
+                ];
             }
         } catch (\Exception $e) {
             return $e->getMessage();
