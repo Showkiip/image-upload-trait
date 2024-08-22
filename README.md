@@ -83,6 +83,9 @@ When the `uploadImage` method is called and a file is successfully uploaded, the
 }
 
 ```
+Handling File Path as a String
+If $file is a string representing a file path, the following code handles the upload process:
+
 If an error occurs, the response might look like this:
 ``` bash
 {
