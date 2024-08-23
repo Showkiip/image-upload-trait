@@ -54,14 +54,7 @@ class SomeController extends Controller
         // Existing file path to delete (optional)
         $existingFile = 'uploads/images/old_example.jpg';
 
-        
         $uploadData = $this->uploads($file, $path, $existingFile);
-
-        // Check if an error message was returned
-        if (is_string($uploadData)) {
-            return response()->json(['error' => $uploadData], 400);
-        }
-
         return response()->json(['data' => $uploadData], 200);
     }
 }
@@ -83,6 +76,9 @@ When the `uploadImage` method is called and a file is successfully uploaded, the
 }
 
 ```
+Handling File Path as a String
+If $file is a string representing a file path, the following code handles the upload process:
+
 If an error occurs, the response might look like this:
 ``` bash
 {
