@@ -16,11 +16,12 @@ trait ImageUpload
                 Storage::disk('public')->delete($existingFile);
             }
 
+            $unqRan = Str::random(20);
             // Check if the file is a valid file path or an uploaded file
             if (is_string($file)) {
                 // Handling the case when `$file` is a file path (as in extracted files)
                 $fileName = basename($file);
-                $destinationPath = $path . $fileName;
+                $destinationPath = $path .$unqRan . $fileName;
                 Storage::disk('public')->put($destinationPath, file_get_contents($file));
 
                 return [
@@ -32,7 +33,6 @@ trait ImageUpload
                 
             } else if ($file && $file->isValid()) {
 
-                $unqRan = Str::random(20);
                 $fileName = time() . $unqRan . $file->getClientOriginalName();
                 Storage::disk('public')->putFileAs($path, $file, $fileName);
 
